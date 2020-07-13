@@ -15,6 +15,15 @@ Aside from the default model configs, there is a lot of flexibility to facilitat
 * Any backbone in my `timm` model collection that supports feature extraction (`features_only` arg) can be used as a bacbkone.
   * Currently this is includes to all models implemented by the EficientNet and MobileNetv3 classes (which also includes MNasNet, MobileNetV2, MixNet and more). More soon...
 
+## License
+
+This repositoy is a forked version of the following libraries, and applies [a MIT license](LICENSE):
+
+1. EfficientDet-PyTorch (https://github.com/rwightman/efficientdet-pytorch) licensed under [Apache 2.0](LICENSE_original), Copyright Ross Wightman
+
+2. PyTorch (https://github.com/pytorch/pytorch)
+
+
 
 ## Updates / Tasks
 
