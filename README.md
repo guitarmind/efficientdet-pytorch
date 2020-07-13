@@ -19,7 +19,7 @@ Aside from the default model configs, there is a lot of flexibility to facilitat
 
 This repositoy is a forked version of the following library, and applies a [MIT license](LICENSE):
 
-EfficientDet-PyTorch (https://github.com/rwightman/efficientdet-pytorch) licensed under [Apache 2.0](LICENSE_original), Copyright Ross Wightman
+- EfficientDet-PyTorch (https://github.com/rwightman/efficientdet-pytorch) licensed under [Apache 2.0](LICENSE_original), Copyright Ross Wightman
 
 
 ## Updates / Tasks
