@@ -332,7 +332,7 @@ def main():
     if args.local_rank == 0:
         logging.info('Scheduled epochs: {}'.format(num_epochs))
 
-    train_anno_set = 'train2017'
+    train_anno_set = f'train2017_fold{args.fold_id}'
     train_annotation_path = os.path.join(args.data, 'annotations', f'instances_{train_anno_set}.json')
     train_image_dir = train_anno_set
     dataset_train = CocoDetection(os.path.join(args.data, train_image_dir), train_annotation_path)
@@ -363,7 +363,7 @@ def main():
         pin_mem=args.pin_mem,
     )
 
-    train_anno_set = 'val2017'
+    train_anno_set = f'val2017_fold{args.fold_id}'
     train_annotation_path = os.path.join(args.data, 'annotations', f'instances_{train_anno_set}.json')
     train_image_dir = train_anno_set
     dataset_eval = CocoDetection(os.path.join(args.data, train_image_dir), train_annotation_path)
