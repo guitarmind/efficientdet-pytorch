@@ -170,6 +170,7 @@ parser.add_argument('--model-ema-decay', type=float, default=0.9998,
                     help='decay factor for model weights moving average (default: 0.9998)')
 
 # Misc
+parser.add_argument("--fold_id", default=0, type=int)
 parser.add_argument('--seed', type=int, default=42, metavar='S',
                     help='random seed (default: 42)')
 parser.add_argument('--log-interval', type=int, default=50, metavar='N',
@@ -215,6 +216,8 @@ def _parse_args():
 def main():
     setup_default_logging()
     args, args_text = _parse_args()
+
+    print(f"Target fold ID: {args.fold_id}")
 
     args.pretrained_backbone = not args.no_pretrained_backbone
     args.prefetcher = not args.no_prefetcher
