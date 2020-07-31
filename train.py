@@ -33,7 +33,7 @@ from timm.utils import *
 from timm.optim import create_optimizer
 from timm.scheduler import create_scheduler
 
-torch.backends.cudnn.benchmark = True
+torch.backends.cudnn.benchmark = False
 
 
 # The first arg parser parses out only the --config argument, this argument is used to

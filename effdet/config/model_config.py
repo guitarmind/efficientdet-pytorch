@@ -14,16 +14,18 @@ def default_detection_model_configs():
     h = OmegaConf.create()
 
     # model name.
-    h.name = 'tf_efficientdet_d1'
+    h.name = 'tf_efficientdet_d5'
 
-    h.backbone_name = 'tf_efficientnet_b1'
+    h.backbone_name = 'tf_efficientnet_b5'
     h.backbone_args = None  # FIXME sort out kwargs vs config for backbone creation
 
     # model specific, input preprocessing parameters
-    h.image_size = 640
+    # h.image_size = 640
+    h.image_size = 1024
 
     # dataset specific head parameters
-    h.num_classes = 90
+    # h.num_classes = 90
+    h.num_classes = 1
 
     # feature + anchor config
     h.min_level = 3
