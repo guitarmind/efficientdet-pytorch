@@ -1,4 +1,4 @@
-from .efficientdet import EfficientDet
+from .efficientdet import EfficientDet, HeadNet
 from .bench import DetBenchTrain, DetBenchPredict
 from .config import get_efficientdet_config
 from .helpers import load_pretrained, load_checkpoint
@@ -25,6 +25,12 @@ def create_model(
         load_checkpoint(model, checkpoint_path, use_ema=checkpoint_ema)
     elif pretrained:
         load_pretrained(model, config.url)
+
+    config.num_classes = 1
+    config.image_size = 1024
+    model.class_net = HeadNet(config,
+        num_outputs=config.num_classes,
+        norm_kwargs=dict(eps=.001, momentum=.01))
 
     # wrap model in task specific bench if set
     if bench_task == 'train':
