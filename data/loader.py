@@ -17,9 +17,6 @@ def fast_collate(batch):
     # FIXME this needs to be more robust
     target = dict()
     for k, v in batch[0][1].items():
-        if k in ["img_id"]:
-            continue
-
         if isinstance(v, np.ndarray):
             # if a numpy array, assume it relates to object instances, pad to MAX_NUM_INSTANCES
             target_shape = (batch_size, MAX_NUM_INSTANCES)
@@ -34,17 +31,20 @@ def fast_collate(batch):
             # scalar, assume per batch
             target_shape = batch_size,
             target_dtype = torch.float32 if isinstance(v, float) else torch.int64
-        target[k] = torch.zeros(target_shape, dtype=target_dtype)
+
+        if k == "img_id":
+            target[k] = [v] * batch_size
+        else:
+            target[k] = torch.zeros(target_shape, dtype=target_dtype)
 
     tensor = torch.zeros((batch_size, *batch[0][0].shape), dtype=torch.uint8)
     for i in range(batch_size):
         tensor[i] += torch.from_numpy(batch[i][0])
         for tk, tv in batch[i][1].items():
-            if tk in ["img_id"]:
-                continue
-
             if isinstance(tv, np.ndarray) and len(tv.shape):
                 target[tk][i, 0:tv.shape[0]] = torch.from_numpy(tv)
+            elif tk == "img_id":
+                target[tk][i] = tv
             else:
                 target[tk][i] = torch.tensor(tv, dtype=target[tk].dtype)
 
