@@ -49,7 +49,8 @@ class COCOEvaluator(Evaluator):
             sample_ids = target['img_id']
 
         detections = detections.cpu()
-        sample_ids = sample_ids.cpu()
+        if torch.is_tensor(sample_ids):
+            sample_ids = sample_ids.cpu()
         for index, sample in enumerate(detections):
             image_id = int(sample_ids[index])
             for det in sample:
