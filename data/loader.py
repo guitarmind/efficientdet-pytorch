@@ -32,10 +32,11 @@ def fast_collate(batch):
             target_shape = batch_size,
             target_dtype = torch.float32 if isinstance(v, float) else torch.int64
 
-        if k == "img_id":
-            target[k] = [v] * batch_size
-        else:
-            target[k] = torch.zeros(target_shape, dtype=target_dtype)
+        # if k == "img_id":
+        #     target[k] = [v] * batch_size
+        # else:
+        #     target[k] = torch.zeros(target_shape, dtype=target_dtype)
+        target[k] = torch.zeros(target_shape, dtype=target_dtype)
 
     tensor = torch.zeros((batch_size, *batch[0][0].shape), dtype=torch.uint8)
     for i in range(batch_size):
@@ -43,8 +44,8 @@ def fast_collate(batch):
         for tk, tv in batch[i][1].items():
             if isinstance(tv, np.ndarray) and len(tv.shape):
                 target[tk][i, 0:tv.shape[0]] = torch.from_numpy(tv)
-            elif tk == "img_id":
-                target[tk][i] = tv
+            # elif tk == "img_id":
+            #     target[tk][i] = tv
             else:
                 target[tk][i] = torch.tensor(tv, dtype=target[tk].dtype)
 
@@ -69,7 +70,8 @@ class PrefetchLoader:
             with torch.cuda.stream(stream):
                 next_input = next_input.cuda(non_blocking=True)
                 next_input = next_input.float().sub_(self.mean).div_(self.std)
-                next_target = {k: (v if type(v) == list else v.cuda(non_blocking=True)) for k, v in next_target.items()}
+                next_target = {k: v.cuda(non_blocking=True) for k, v in next_target.items()}
+                # next_target = {k: (v if type(v) == list else v.cuda(non_blocking=True)) for k, v in next_target.items()}
 
             if not first:
                 yield input, target

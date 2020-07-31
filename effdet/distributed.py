@@ -276,8 +276,8 @@ def all_gather_container(container, group=dist_group.WORLD):
             gathered[k] = v
         return gathered
     elif isinstance(container, (list, tuple)):
-        if type(container[0]) == str:
-            return itertools.chain(*container)
+        # if type(container[0]) == str:
+        #     return itertools.chain(*container)
         gathered = [_do_gather(v) for v in container]
         if isinstance(container, tuple):
             gathered = tuple(gathered)
