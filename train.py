@@ -217,7 +217,7 @@ def main():
     setup_default_logging()
     args, args_text = _parse_args()
 
-    print(f"Target fold ID: {args.fold_id}")
+    print(f"Target fold ID: {args.fold_id}\n")
 
     args.pretrained_backbone = not args.no_pretrained_backbone
     args.prefetcher = not args.no_prefetcher
