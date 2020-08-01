@@ -186,7 +186,7 @@ class CocoDetection(data.Dataset):
         path = img_info['file_name']
         img = Image.open(os.path.join(self.root, path)).convert('RGB')
         if img_info['width'] != 1024:
-            img = img.resize((img_info['width'],simg_info['height']))
+            img = img.resize((img_info['width'],img_info['height']))
         if self.transform is not None:
             # markpeng - TODO
             # https://github.com/Tianxiaomo/pytorch-YOLOv4/blob/f25ef5fdf4e5e62080fa88d29129dc55cbd2725e/dataset.py
